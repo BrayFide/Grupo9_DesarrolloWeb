@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Login - MiBirra</title>
+  
+    <link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}">
+
+    <th:block th:replace="layout/plantilla :: head"></th:block>
+    <style>
+        body {
+            background-image: url('/images/background.jpg'); 
+            background-size: cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .login-container {
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+    </style>
+</head>
+<body>
+
+    <header th:replace="layout/plantilla :: header"></header>
+
+    <div class="login-container">
+        <form th:action="@{/login}" method="post">
+            <div>
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username">
+            </div>
+            <div>
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password">
+            </div>
+            <div>
+                <button type="submit">Login</button>
+            </div>
+        </form>
+    </div>
+
+
+    <footer th:replace="layout/plantilla :: footer"></footer>
+</body>
+</html>
