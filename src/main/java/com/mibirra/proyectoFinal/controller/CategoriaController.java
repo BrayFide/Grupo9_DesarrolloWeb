@@ -14,8 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
+
 
 @Controller
 @RequestMapping("/categoria")
@@ -33,20 +32,10 @@ public class CategoriaController {
         return "/categoria/listado";
 
     }
-    @Autowired
-    private FirebaseStorageService firebaseStorageService;
+    
     @PostMapping ("/guardar")
-    public String guardar(Categoria categoria,
-             @RequestParam MultipartFile imagenFile){
-        if (!imagenFile.isEmpty()){
-            //Se sube la imagen al Storage
-            
-          categoriaService.save(categoria);
-          String rutaImagen=firebaseStorageService.cargaImagen(imagenFile,
-                  "categoria", categoria.getIdCategoria());
-              categoria.setRutaImagen(rutaImagen);
-            
-        }
+    public String guardar(Categoria categoria){
+             
         categoriaService.save(categoria);
         return "redirect:/categoria/listado";
         
