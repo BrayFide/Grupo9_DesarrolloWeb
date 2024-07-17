@@ -5,14 +5,15 @@
 package com.mibirra.proyectoFinal.dao;
 
 
-import com.mibirra.proyectoFinal.domain.Categoria;
+
+import com.mibirra.proyectoFinal.domain.Mesa;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
  *
  * @author braym
  */
-public interface CategoriaDao  extends JpaRepository<Categoria,Long> {
+public interface MesaDao  extends JpaRepository<Mesa,Long> {
     
     
 }

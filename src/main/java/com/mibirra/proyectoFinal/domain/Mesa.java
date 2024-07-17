@@ -10,9 +10,9 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "categoria")
+@Table(name = "Tables")
 
-public class Categoria implements Serializable{
+public class Mesa implements Serializable{
     
     
     private static final long serialVersionUID = 1l;
@@ -20,11 +20,11 @@ public class Categoria implements Serializable{
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_categoria")
-    private Long idCategoria;
+    @Column(name = "idTable")
+    private Long idMesa;
     
     
-    private String descripcion;
+    private String descripcion; //Modificar variables
     private String rutaImagen;
     private boolean activo;
     
