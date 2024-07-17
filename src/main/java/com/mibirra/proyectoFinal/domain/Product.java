@@ -28,4 +28,5 @@ public class Product implements Serializable{
     private int Stock;
     private int CreateAuditUser;
     private Date CreateAuditDate;
+    private int State;
 }
