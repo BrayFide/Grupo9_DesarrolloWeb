@@ -4,28 +4,31 @@
  */
 package com.mibirra.proyectoFinal.domain;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import java.io.Serializable;
 import java.sql.Date;
 import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "Product")
+@Table(name = "Purchase")
 
-public class Product implements Serializable{
+public class Purchase implements Serializable{
     private static final long serialVersionUID = 1l;
     
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long IdProduct;
+    private Long IdPurchase;
     
     
-    private String Code;
-    private String Name;
-    private String Description;
-    private int Stock;
+    private int IdProduct;
+    private int IdProvider;
+    private Double Total;
     private int CreateAuditUser;
     private Date CreateAuditDate;
     private int State;
