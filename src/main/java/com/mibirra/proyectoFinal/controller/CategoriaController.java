@@ -4,7 +4,17 @@
  */
 package com.mibirra.proyectoFinal.controller;
 
-
+import com.mibirra.proyectoFinal.domain.Categoria;
+import com.mibirra.proyectoFinal.service.CategoriaService;
+import com.mibirra.proyectoFinal.service.FirebaseStorageService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import com.mibirra.proyectoFinal.domain.Categoria;
 import com.mibirra.proyectoFinal.service.CategoriaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +24,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import org.springframework.web.bind.annotation.RequestMapping;
+
 
 
 @Controller
@@ -32,28 +43,42 @@ public class CategoriaController {
         return "/categoria/listado";
 
     }
+    @Autowired
+    private FirebaseStorageService firebaseStorageService;
     
-    @PostMapping ("/guardar")
-    public String guardar(Categoria categoria){
-             
+    @PostMapping("guardar")
+    public String guardar (Categoria categoria,
+            @RequestParam MultipartFile imagenFile){
+        if (!imagenFile.isEmpty()) {
+            //se sube la imagen
+            categoriaService.save(categoria);
+            String rutaImagen=firebaseStorageService.guardar(imagenFile, "categoria", categoria.getIdCategoria());
+            categoria.setRutaImagen(rutaImagen);
+        }
         categoriaService.save(categoria);
         return "redirect:/categoria/listado";
-        
     }
-    
+    @PostMapping("/guardar")
+    public String guardar(Categoria categoria) {
+
+        categoriaService.save(categoria);
+        return "redirect:/categoria/listado";
+
+    }
+
     @GetMapping("/eliminar/{idCategoria}")
-    public String eliminar (Categoria categoria){
+    public String eliminar(Categoria categoria) {
         categoriaService.delete(categoria);
         return "redirect:/categoria/listado";
     }
-    
+
     @GetMapping("/modificar/{idCategoria}")
-    public String modificar (Categoria categoria, Model model){
+    public String modificar(Categoria categoria, Model model) {
         categoria = categoriaService.getCategoria(categoria);
-        
+
         model.addAttribute("categoria", categoria);
         return "/categoria/modifica";
-        
+
     }
 
 }
