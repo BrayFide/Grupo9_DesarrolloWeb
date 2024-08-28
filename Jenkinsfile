@@ -10,9 +10,6 @@ pipeline {
 
     stages {
         stage('Construcción de Docker') {
-            when {
-                expression { currentBuild.result == 'SUCCESS' }
-            }
             steps {
                 script {
                     sh "docker build -t ${DOCKER_IMAGE} ."
